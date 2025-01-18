@@ -1,6 +1,25 @@
 
 public class Backtracking {
 
+// sub set problem 
+public static void subset( String str,String ans,int i){
+     if(i==str.length()){
+        if(ans.length()==0){
+            System.out.println("null");
+        }else{
+            System.out.println(ans);
+        }
+        return;
+}
+
+//when we add that alphabet
+      subset(str, ans+str.charAt(i), i+1);
+
+    //   when we  dont want to add that index/
+    subset(str, ans, i+1);
+     
+}
+
 
     public static void queen(char[][] board,int row){
             if(row==board.length){
@@ -153,27 +172,30 @@ public static  boolean sudukoSolver( int suduko[][],int row, int col){
     //       System.out.println("total no of ways is =>  "+count);
     
      
-    int suduko[][]={{0,0,8,0,0,0,0,0,0},
-                        {4,9,0,1,5,7,0,0,2},
-                        {0,0,3,0,0,4,1,9,0},
-                        {1,8,5,0,6,0,0,2,0},
-                        {0,0,0,0,2,0,0,6,0},
-                        {9,6,0,4,0,5,3,0,0},
-                        {0,3,0,0,7,2,0,0,4},
-                        {0,4,9,0,3,0,0,5,7},
-                        {8,2,7,0,0,9,0,1,3}};
-                    if ( sudukoSolver(suduko, 0, 0)) {
-                        System.out.println("there is solution  exits ");
-                        Printsuduko(suduko);
+    // int suduko[][]={{0,0,8,0,0,0,0,0,0},
+    //                     {4,9,0,1,5,7,0,0,2},
+    //                     {0,0,3,0,0,4,1,9,0},
+    //                     {1,8,5,0,6,0,0,2,0},
+    //                     {0,0,0,0,2,0,0,6,0},
+    //                     {9,6,0,4,0,5,3,0,0},
+    //                     {0,3,0,0,7,2,0,0,4},
+    //                     {0,4,9,0,3,0,0,5,7},
+    //                     {8,2,7,0,0,9,0,1,3}};
+    //                 if ( sudukoSolver(suduko, 0, 0)) {
+    //                     System.out.println("there is solution  exits ");
+    //                     Printsuduko(suduko);
 
                         
-                    }   else{
-                        System.out.println("there is no Any solution of this suduko");
-                    }
+    //                 }   else{
+    //                     System.out.println("there is no Any solution of this suduko");
+    //                 }
+    String s;
+   s="abc";
+   subset(s,"",0);
 
     }
   
-
+        
  // #####################Another problem of n queens problem &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     // Que. check is solution exits if exits print that one solution
     

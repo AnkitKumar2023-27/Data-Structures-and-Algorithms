@@ -63,6 +63,9 @@ public  static int tilling(int n){
     return  totalWays;
 }
 
+//Assignment problem
+
+
 
 public  static void binaryString(int n,int lastPlace, String str){
     if(n==0){
@@ -76,6 +79,24 @@ public  static void binaryString(int n,int lastPlace, String str){
     }
     
 }
+static String digit[] = {
+      " ", "ABC", "DEF", "GHI", "JKL", "MNO", "PQR", "STU", "VWX", "YZ"
+};
+
+public static void digitToStr(int digits) {
+    // Base case
+    if (digits == 0) {
+        return;
+    }
+
+    // Recursive call to process the next digit
+    digitToStr(digits / 10);
+
+    // Process the current digit
+    int index = digits % 10;
+    System.out.print(digit[index] + "");
+}
+
 
 
 
@@ -90,7 +111,13 @@ public  static void binaryString(int n,int lastPlace, String str){
     // System.out.println(IsSorted(arr,0));
     // System.out.println(Power(2,5));
     // System.out.println(tilling(2));
-        binaryString(3, 0, "");
+        // binaryString(3, 0, "");
+
+       // DIGITS TO STRING PROBLEM 
+        short var1 = 12;
+        System.out.println("The digits of " + var1 + " in words are:");
+        digitToStr(var1);
+        System.out.println();
     }
     
 }
