@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class bfs {
+public class BipurtypeGraph {
 
 
    
@@ -21,28 +21,45 @@ public class bfs {
 
     }
 
-    public static void bfs(ArrayList<Eadge>graph[]){
+    public static boolean Bipertype(ArrayList<Eadge>graph[]){
 
-        Queue<Integer>q=new LinkedList<>();
-        boolean vis[]=new boolean[graph.length];
-        q.add(0);
-
-        while (!q.isEmpty()) {
-
-            int curr=q.remove();
-            if(!vis[curr]){
-                System.out.print(curr+" ");
-                vis[curr]=true;
-
-                for(int i=0;i<graph[curr].size();i++){
-                   Eadge e=graph[curr].get(i);
-                    q.add(e.dest);
-                }
-            }
-            
+        int col[]=new int[graph.length];
+         for( int i=0;i<graph.length;i++){
+            col[i]=-1;
         }
 
+    Queue<Integer>q=new LinkedList<>() ;
+
+    for(int i=0;i<graph.length;i++){
+        if(col[i]==-1){
+            col[i]=0;
+            q.add(i);
+        }
+    } 
+
+    while(!q.isEmpty()){
+
+        int curr=q.remove();
+         for( int j=0;j<graph[curr].size();j++){
+               Eadge e=graph[curr].get(j);
+
+               if(col[e.dest]==-1){
+                int nextCol=col[curr]==0?1:0;
+                col[e.dest]=nextCol;
+                q.add(e.dest);
+
+               }
+               if(col[e.dest]==col[curr]){
+                return false;
+               }
+
+
+         }       
+
     }
+     return true;
+    }
+   
 
 
     public static void main(String[] args) {
@@ -79,16 +96,11 @@ public class bfs {
 
         
         graph[6].add(new Eadge(6,5,3));
+     
 
-      bfs(graph);
-      System.out.println();
+    System.out.println(Bipertype(graph));
 
-   
-        
       
-       
-
-        
     }
     
 }
