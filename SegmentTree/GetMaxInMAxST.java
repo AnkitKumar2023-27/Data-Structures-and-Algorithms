@@ -39,7 +39,7 @@ public class GetMaxInMAxST {
          return Math.max(leftAns, rightAns);
     }
 
- }
+ } 
     public static void main(String[] args) {
 
         int arr[]={6,8,-1,2,17,1,3,2,4};
