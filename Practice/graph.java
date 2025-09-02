@@ -297,7 +297,144 @@ public static void prims(ArrayList<Eadge>graph[]){
   }
     System.out.println(MinTotalCost);
 }
-    public static void main(String[] args) {
+
+public static class info implements Comparable<info>{
+  int des;
+   int cost;
+   public info( int d, int c){
+            this.des=d;
+            this.cost=c;
+
+   }
+   public int compareTo(info p2){
+    return this.cost-p2.cost;
+   }
+}
+//find minmum Dis/
+public static int minDis( int arr[][]){
+  boolean vis[]=new boolean[arr.length];
+  PriorityQueue<info>pq=new PriorityQueue<>();
+  pq.add(new info(0, 0));
+  int mindis=0;
+  while( !pq.isEmpty()){
+      info curr=pq.remove();
+
+      if(!vis[curr.des]){
+        vis[curr.des]=true;
+         mindis+=curr.cost;
+
+        for( int i=0; i< arr[curr.des].length;i++){
+          if(arr[curr.des][i]!=0){
+
+            pq.add(new info(i, arr[curr.des][i]));
+          }
+
+        }
+      }
+}
+return mindis;
+
+}
+
+
+//////////////////////////////Discuss and question on the Disjpint sets ////////////////////////////////////////////////////
+//// base of find op ration and  union //////////////
+static int n=7;
+static int rank[]=new int[n];
+ static int par[]=new int[n];
+ 
+
+ public static void init(){
+  for( int i=0 ; i<n;i++){
+       par[i]=i;
+ }
+ }
+  public static  int find(int x ){
+    if(x==par[x]){
+      return x;
+    }
+    
+      return find(par[x]);
+  
+  };
+
+public static void union( int a , int b){
+  int parA=find(a);
+   int parB= find(b);
+   if( rank[parA]==rank[parB]){
+    par[parB]=parA;
+    rank[parA]++;
+   }
+   else if(rank[parA]>rank[parB]){
+            par[parB]=parA;
+   }else{
+    rank[parA]=parB;
+
+   }
+}
+
+///kruskal Algo bAsed on the Disjoint sets
+/// 
+ 
+ public static void graphCreationKr(ArrayList<EadgeKr>Eadges){
+
+   
+
+                Eadges .add(new EadgeKr(0, 1, 10));
+                Eadges  .add(new EadgeKr(0,2,15));
+                  Eadges.add(new EadgeKr(0,3,30));
+              
+                  Eadges .add(new EadgeKr(1,3,40));
+
+                    Eadges.add(new EadgeKr(2,3,50));
+          
+
+   }
+   
+    public static class EadgeKr implements Comparable<EadgeKr> {
+        int src;
+         int dest;
+         int wt;
+         public EadgeKr(int s, int d, int w){
+             this.src=s;
+             this.dest=d;
+             this.wt=w;
+             
+         }
+         @Override
+         public int compareTo(EadgeKr p2) {
+             return this.wt-p2.wt;
+          
+         }
+
+    
+      
+    }
+
+public static void kruskalAlgo( ArrayList<EadgeKr>Eadges, int v){
+  Collections.sort(Eadges);
+  init();
+  int minCos=0;
+  for( int i=0;i<v-1;i++){
+    EadgeKr e=Eadges.get(i);
+    int src=e.src;
+    int des=e.dest;
+    int ParSrc=find(src);
+     int ParDest=find(des);
+     if(ParSrc!=ParDest){
+      union(src, des);
+          minCos+=e.wt;
+     }
+
+
+  }
+
+  System.out.println("Total min Cost= "+minCos);
+
+}
+
+
+  public static void main(String[] args) {
         int v=7;
         @SuppressWarnings("unchecked")
         ArrayList<Eadge>graph[]=new ArrayList[v];
@@ -340,8 +477,45 @@ public static void prims(ArrayList<Eadge>graph[]){
     ArrayList<Eadge>    graph3[]=new ArrayList[w];
       graphCreation3(graph3);
       prims(graph3);
-        
+
+
+      //min city distance
+// min distance question 
+System.out.println("minmum distance betwen the cities");
+int  cities[][]={{0,1,2,3,4,},
+              {1,0,5,0,7},
+            {2,5,0,6,0},
+          {3,0,6,0,0},
+          {4,7,0,0,0}};
+          
+        System.out.println(minDis(cities));
+
+
+///////////////// DISJOINT SETS////////////////
+
+System.out.println(); 
+
+System.out.println("Disjoint sets ");
+init();
+union(1,3);
+System.out.println("Parent of 3 chhange because of unionof 1,3 = "+ find(3));
+union(2,4);
+union(3,6);
+union(2, 3);
+System.out.println(find(4));
+System.out.println(find(6));
+
+// Kruskal Algo//
+
+System.out.println();
+System.out.println("kruskal Algo");
+
+ArrayList<EadgeKr>eadges=new ArrayList<>();
+int n=4;
+graphCreationKr(eadges);
+kruskalAlgo(eadges, n);
+
     
     }
-    
+     
 }
