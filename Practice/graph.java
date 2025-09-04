@@ -461,8 +461,88 @@ public static void kruskalAlgo( ArrayList<EadgeKr>Eadges, int v){
       helper(image, sr, sc-1, color, vis,orgCol);
       helper(image, sr-1, sc, color, vis,orgCol);
 
-    }   
+   
+     }  
+    public static  void topsort(ArrayList<Eadge>graph[], int curr,Stack<Integer>s, boolean vis[]){
+      vis[curr]=true;
+      for( int i=0;i<graph[curr].size();i++){
+        Eadge e=graph[curr].get(i);
+        if ((!vis[e.dest])) {
+          topsort(graph, e.dest,s, vis);
+        }
+      }
+      s.push(curr);
+
+    } ;
+
+        public static  void DFSKR(ArrayList<Eadge>graph[], boolean vis[],int curr){
+      vis[curr]=true;
+      System.out.print(curr+" ");
+      for( int i=0;i<graph[curr].size();i++){
+        Eadge e=graph[curr].get(i);
+        if ((!vis[e.dest])) {
+          DFSKR(graph,vis,e.dest);
+        }
+      }
+     
+
+    } ;
+
+@SuppressWarnings("unchecked")
+public static void kosaRajuAlgo(ArrayList<Eadge>graph[], int v){
+     boolean vis[]=new boolean[graph.length];
+     Stack<Integer>s=new Stack<>();
+
+     for( int i=0;i<graph.length;i++){
+      if(!vis[i]){
+        topsort(graph,i,s,vis);
+      }
+     }
+
+
+   //transpose
+     ArrayList<Eadge>[] transpose = new ArrayList[v]; 
+   for( int i=0;i<v; i++){ 
+      vis[i]=false;
+     transpose[i]=new ArrayList<>();
+   } 
+
+   for( int i=0;i<v;i++){
+    for( int j=0; j<graph[i].size();j++){
+      Eadge e=graph[i].get(j);
+      transpose[e.dest].add(new Eadge(e.dest, e.src, 1));
+
+    }
+   }
+
+   while (!s.isEmpty()) {
+    int curr=s.pop();
+    if(!vis[curr]){
+        System.out.print("SCC =");
+        DFSKR(transpose, vis, curr);
+    }
+      System.out.println();
+
     
+   }
+ 
+}
+       public static void graphCreatioKR(ArrayList<Eadge>graph[],int v){
+
+    for ( int  i=0;i<v;i++){
+        graph[i] =new ArrayList<>();
+    };
+   
+      graph[0].add(new Eadge(0, 2, 1));
+      graph[0].add(new Eadge(0,3,1));
+      graph[1].add(new Eadge(1,0,1));
+      graph[2].add(new Eadge(2,1,1));
+      graph[3].add(new Eadge(3,4,1));
+      // graph[4].add(new Eadge(4,5,1));
+      // graph[5].add(new Eadge(5,6,1));
+
+
+   }
 
 
   public static void main(String[] args) {
@@ -545,6 +625,15 @@ ArrayList<EadgeKr>eadges=new ArrayList<>();
 int n=4;
 graphCreationKr(eadges);
 kruskalAlgo(eadges, n);
+System.out.println();
+
+System.out.println("KosaRajo algorithm for Storngly Connected component ");
+int N=5;
+@SuppressWarnings("unchecked")
+ArrayList<Eadge>graphKR[]=new ArrayList[N];
+ graphCreatioKR(graphKR,N);
+kosaRajuAlgo(graphKR, N);
+
 
     
     }
