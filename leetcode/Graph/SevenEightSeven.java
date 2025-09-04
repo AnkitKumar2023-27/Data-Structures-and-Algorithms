@@ -32,6 +32,7 @@ public class SevenEightSeven {
         
     }
 
+    @SuppressWarnings("unused")
     public static  int price(ArrayList<eadge>graph[], int src, int  dst, int k ){
         // boolean vis[]= new boolean[graph.length];
         int dis[]=new int[graph.length];
