@@ -27,7 +27,7 @@ public class FiveFourSeven {
             }
         }
 
-      // Step 3: DFS to count connected components
+    
         boolean[] vis = new boolean[n];
         int count = 0;
         for (int i = 0; i < n; i++) {
@@ -83,14 +83,13 @@ public class FiveFourSeven {
     // Test
     public static void main(String[] args) {
         FiveFourSeven obj = new FiveFourSeven();
-        int isConnected[][] = {
+        int isConnected[][] = {{1,1,0},
+            {1,1,0},{0,0,1}
+        };
+
         
-    {1, 1, 0, 0, 0},
-    {0, 1, 0, 0, 1},
-    {1, 0, 0, 1, 1},
-    {0, 0, 0, 0, 0},
-    {1, 0, 1, 1, 0}
-};
+   
+
 
     
         System.out.println(obj.findCircleNum(isConnected)); // Output: 2
