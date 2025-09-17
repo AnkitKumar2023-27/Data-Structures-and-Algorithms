@@ -363,6 +363,7 @@ public static void union( int a , int b){
    int parB= find(b);
    if( rank[parA]==rank[parB]){
     par[parB]=parA;
+    rank[parB]=rank[parA];
     rank[parA]++;
    }
    else if(rank[parA]>rank[parB]){
