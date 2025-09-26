@@ -39,7 +39,7 @@ public class prefixProblem {
              int idx=word.charAt(i)-'a';
              if(curr.children[idx]==null){
                 return;
-             }
+             } 
                 if(curr.children[idx].freq==1){
                     System.out.println(word.substring(0, i+1));
                     return;
